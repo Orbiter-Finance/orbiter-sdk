@@ -16,6 +16,14 @@ yarn add orbiter-sdk
 npm install orbiter-sdk --save
 ```
 
+## Examples
+
+### Frontend
+
+![example-frontend.png](./example/assets/example-frontend.png)
+
+Front-end example project based on vue3+vite. [dir](./example/frontend/)
+
 ## Types
 
 ### BridgeToken
@@ -41,6 +49,8 @@ npm install orbiter-sdk --save
 ### BridgeNetwork
 
 value: `'Mainnet' | 'Testnet'`
+
+## Classes
 
 ### Bridge
 
@@ -106,12 +116,6 @@ Params:
 | amountHm | string \| number | undefined | Human readable amount. ex: 0.01 |
 
 Return: The current data structure returned by different from chains, no unified data structure yet
-
-## Examples
-
-### Frontend
-
-Front-end example project based on vue3+vite. [dir](./example/frontend/)
 
 ## Features
 
