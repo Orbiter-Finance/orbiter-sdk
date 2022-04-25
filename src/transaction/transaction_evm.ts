@@ -1,6 +1,8 @@
-import { BigNumberish, ethers, providers, utils } from 'ethers'
-import abis from '../config/abis'
+import { TransactionResponse } from '@ethersproject/abstract-provider'
+import { BigNumberish, ethers } from 'ethers'
+import config from '../config'
 import { isEthTokenAddress } from '../utils'
+import { CrossAddress } from '../utils/cross_address'
 import { Transaction, TransactionTransferOptions } from './transaction'
 
 export class TransactionEvm extends Transaction {
@@ -25,8 +27,32 @@ export class TransactionEvm extends Transaction {
   /**
    * @param options
    */
-  public async transfer(options: TransactionTransferOptions & { defaultGasLimit?: BigNumberish }) {
+  private async transferCrossAddress(options: TransactionTransferOptions) {
+    const crossAddress = new CrossAddress(this.signer, this.chainId)
+    if (isEthTokenAddress(options.tokenAddress)) {
+      return await crossAddress.transfer(options.toAddress, options.amount, options.crossAddressExt)
+    } else {
+      return await crossAddress.transferERC20(
+        options.tokenAddress,
+        options.toAddress,
+        options.amount,
+        options.crossAddressExt
+      )
+    }
+  }
+
+  /**
+   *
+   * @param options
+   * @returns
+   */
+  public async transfer(options: TransactionTransferOptions) {
     const amountHex = ethers.BigNumber.from(options.amount).toHexString()
+
+    // Cross address transfer
+    if (options.crossAddressExt) {
+      return await this.transferCrossAddress(options)
+    }
 
     if (isEthTokenAddress(options.tokenAddress)) {
       // When tokenAddress is eth
@@ -44,7 +70,7 @@ export class TransactionEvm extends Transaction {
       })
     } else {
       // When tokenAddress is erc20
-      const contract = new ethers.Contract(options.tokenAddress, abis.erc20, this.signer)
+      const contract = new ethers.Contract(options.tokenAddress, config.abis.erc20, this.signer)
       if (!contract) {
         throw new Error('Failed to obtain contract information, please refresh and try again')
       }
@@ -53,7 +79,7 @@ export class TransactionEvm extends Transaction {
         return contract.estimateGas.transfer(options.toAddress, amountHex)
       }, options.defaultGasLimit)
 
-      return await contract.transfer(options.toAddress, amountHex, {
+      return <TransactionResponse>await contract.transfer(options.toAddress, amountHex, {
         gasLimit: gasLimit,
       })
     }

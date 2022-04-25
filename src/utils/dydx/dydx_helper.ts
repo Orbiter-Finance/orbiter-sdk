@@ -6,10 +6,9 @@ import {
   TransferResponseObject,
 } from '@dydxprotocol/v3-client'
 import { getAccountId } from '@dydxprotocol/v3-client/build/src/lib/db'
-import BigNumber from 'bignumber.js'
 import { ethers, utils } from 'ethers'
 import Web3 from 'web3'
-import { equalsIgnoreCase } from '..'
+import { ensureMetamaskNetwork, equalsIgnoreCase } from '..'
 import chains_api from '../../config/chains_api'
 
 const DYDX_MAKERS = {
@@ -88,15 +87,17 @@ export class DydxHelper {
     if (!this.host) {
       throw new Error('Sorry, miss param [host]')
     }
-    // if (!this.web3) {
-    //   throw new Error('Sorry, miss param [web3]')
-    // }
 
     const client = <any>new DydxClient(this.host, {
       networkId: this.networkId,
       web3: <any>this.web3,
     })
     if (ethereumAddress && this.web3) {
+      // Ensure network
+      if (this.web3.givenProvider.isMetaMask === true) {
+        await ensureMetamaskNetwork(this.chainId, this.web3.givenProvider)
+      }
+
       const userExists = await client.public.doesUserExistWithAddress(ethereumAddress)
 
       if (userExists.exists) {
@@ -288,8 +289,8 @@ export class DydxHelper {
       transactionIndex: 0,
       from: '',
       to: '',
-      value: new BigNumber(isTransferIn ? transfer.creditAmount : transfer.debitAmount)
-        .multipliedBy(10 ** 6)
+      value: ethers.utils
+        .parseUnits(isTransferIn ? transfer.creditAmount : transfer.debitAmount, 6)
         .toString(), // Only usdc
       txreceipt_status: transfer.status,
       contractAddress: '', // Only usdc

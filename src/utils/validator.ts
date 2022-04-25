@@ -35,10 +35,10 @@ export class ChainValidator {
   }
 
   static starknet(chainId: number) {
-    if (chainId == 3) {
+    if (chainId == 4) {
       return ChainValidatorTypes.Mainnet
     }
-    if (chainId == 33) {
+    if (chainId == 44) {
       return ChainValidatorTypes.Testnet
     }
     return undefined

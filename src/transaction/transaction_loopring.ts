@@ -96,9 +96,7 @@ export class TransactionLoopring extends Transaction {
   /**
    * @param options
    */
-  public async transfer(
-    options: TransactionTransferOptions & { fromAddress: string; memo?: string }
-  ) {
+  public async transfer(options: TransactionTransferOptions) {
     const networkId = ChainValidator.loopring(this.chainId) == ChainValidatorTypes.Mainnet ? 1 : 5
     const exchangeApi = new ExchangeAPI({ chainId: networkId })
     const userApi = new UserAPI({ chainId: networkId })

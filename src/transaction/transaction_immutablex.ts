@@ -7,9 +7,7 @@ export class TransactionImmutablex extends Transaction {
   /**
    * @param options
    */
-  public async transfer(
-    options: TransactionTransferOptions & { decimals: number; symbol?: string }
-  ) {
+  public async transfer(options: TransactionTransferOptions) {
     const imxHelper = new IMXHelper(this.chainId, this.signer)
     const addressOrIndex = await this.signer.getAddress()
     const imxClient = await imxHelper.getImmutableXClient(addressOrIndex, true)

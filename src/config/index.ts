@@ -1,6 +1,7 @@
 import chains from './chains'
 import chainsApi from './chains_api'
-import abis from './abis'
+import * as abis from './abis'
+import * as contracts from './contracts'
 
 const orbiterChainIdToNetworkId: { [key: number]: string } = {
   1: '1', // mainnet
@@ -30,6 +31,8 @@ export default {
   chainsApi,
 
   abis,
+
+  contracts,
 
   orbiterChainIdToNetworkId,
 }

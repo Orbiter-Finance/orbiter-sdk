@@ -17,14 +17,7 @@ export class TransactionDydx extends Transaction {
   /**
    * @param options
    */
-  public async transfer(
-    options: TransactionTransferOptions & {
-      fromAddress: string
-      receiverPublicKey: string
-      receiverPositionId: string
-      clientIdAddress?: string
-    }
-  ) {
+  public async transfer(options: TransactionTransferOptions) {
     const dydxHelper = new DydxHelper(this.chainId, this.web3, SigningMethod.MetaMask)
     const dydxClient = await dydxHelper.getDydxClient(options.fromAddress, false, true)
     const dydxAccount = await dydxHelper.getAccount(options.fromAddress)

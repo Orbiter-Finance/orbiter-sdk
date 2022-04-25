@@ -165,7 +165,7 @@ class IMXListen {
   }
 }
 
-const factorys = {}
+const factorys:{} = {}
 /**
  *
  * @param chainId
