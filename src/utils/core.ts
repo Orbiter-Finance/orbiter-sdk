@@ -1,4 +1,5 @@
 import { BigNumber } from 'bignumber.js'
+import { performUserAmountLegality } from './userAmountProtector'
 
 const MAX_BITS = {
   eth: 256,
@@ -120,6 +121,7 @@ export function isAmountValid(chain, amount) {
 }
 
 export function getToAmountFromUserAmount(userAmount, selectMakerInfo, isWei) {
+  userAmount = performUserAmountLegality(userAmount, selectMakerInfo);
   let toAmount_tradingFee = new BigNumber(userAmount).minus(
     new BigNumber(selectMakerInfo.tradingFee)
   )
