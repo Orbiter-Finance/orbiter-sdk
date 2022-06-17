@@ -49,4 +49,9 @@ export default {
     Mainnet: 'https://api.dydx.exchange',
     Testnet:  'https://api.stage.dydx.exchange',
   },
+  zkspace: {
+    key: "",
+    Mainnet: "https://api.zks.app/v3/1",
+    Testnet: "https://api.zks.app/v3/4"
+  }
 }

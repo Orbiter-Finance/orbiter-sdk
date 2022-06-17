@@ -11,6 +11,9 @@ const MAX_BITS = {
   loopring: 256,
   metis: 256,
   dydx: 28,
+  boba: 256,
+  zkspace: 35,
+  zksync2: 256
 }
 
 export const CHAIN_INDEX = {
@@ -34,7 +37,15 @@ export const CHAIN_INDEX = {
   510: 'metis',
   11: 'dydx',
   511: 'dydx',
+  13: "boba",
+  513: "boba",
+  12: "zkspace", // main net
+  512: "zkspace", // test net
+  514: "zksync2", // test net
 }
+
+// all chain id types
+export type CHAIN_ID_TYPE = keyof typeof CHAIN_INDEX;
 
 export const SIZE_OP = {
   P_NUMBER: 4,
@@ -48,6 +59,9 @@ export function isLimitNumber(chain: string | number) {
     return true
   }
   if (chain === 11 || chain === 511 || chain === 'dydx') {
+    return true
+  }  
+  if (chain === 12 || chain === 512 || chain === 'zkspace') {
     return true
   }
   return false

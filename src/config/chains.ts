@@ -208,4 +208,65 @@ export default [
     explorers: [],
     infoURL: 'https://stardust-explorer.metis.io',
   },
+  {
+    "name": "Boba",
+    "chainId": 288,
+    "shortName": "BOBA",
+    "networkId": 288,
+    "nativeCurrency": {
+      "name": "Ether",
+      "symbol": "ETH",
+      "decimals": 18
+    },
+    "rpc": ["https://mainnet.boba.network", "wss://ws.mainnet.boba.network"],
+    "faucets": [],
+    "infoURL": "https://gateway.boba.network/",
+    "explorers": []
+  },
+  {
+    "name": "Boba(R)",
+    "chainId": 28,
+    "shortName": "BOBA",
+    "networkId": 28,
+    "nativeCurrency": {
+      "name": "Ether",
+      "symbol": "ETH",
+      "decimals": 18
+    },
+    "rpc": ["https://mainnet.boba.network", "wss://ws.mainnet.boba.network"],
+    "faucets": [],
+    "infoURL": "https://gateway.boba.network/",
+    "explorers": []
+  },
+  {
+      "name": "Boba(R)",
+      "chainId": 28,
+      "shortName": "BOBA",
+      "networkId": 28,
+      "nativeCurrency": {
+        "name": "Ether",
+        "symbol": "ETH",
+        "decimals": 18
+      },
+      "rpc": ["https://mainnet.boba.network", "wss://ws.mainnet.boba.network"],
+      "faucets": [],
+      "infoURL": "https://gateway.boba.network/"
+    },
+    {
+      "name": "Zksync2(G)",
+      "chainId": 280,
+      "shortName": "Zksync2",
+      "networkId": 280,
+      "nativeCurrency": {
+        "name": "Ether",
+        "symbol": "ETH",
+        "decimals": 18
+      },
+      "rpc": [
+        "https://zksync2-testnet.zksync.dev",
+        "wss://zksync2-testnet.zksync.dev/ws"
+      ],
+      "faucets": [],
+      "infoURL": "https://zksync2-testnet.zkscan.io/"
+    }
 ]

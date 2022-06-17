@@ -24,6 +24,11 @@ const orbiterChainIdToNetworkId: { [key: number]: string } = {
   88: '3', // ropsten
   99: '5', // loopring(G)
   511: '3', // dydx(R)
+  13: '288', // boba mainnet
+  513: '28', // boba
+  512: "4", // zkspace
+  12: "1",
+  514: '280'//zksync2(G)
 }
 
 export default {

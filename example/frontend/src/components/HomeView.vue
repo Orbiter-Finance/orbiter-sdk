@@ -115,8 +115,8 @@ const currentToChain = computed(() => state.toChains.find((item) => item.id == s
 // methods
 const bridge = new Bridge('Testnet')
 const refreshBridgeSupports = async () => {
+  // 根据当前的fromChainId和当前toChainId计算出两个select选择框的数据(fromChain不能包括fromChainId, toChains不能包括ToChainId)
   const supports = await bridge.supports(currentFromChain.value, currentToChain.value)
-
   state.fromChains = supports.fromChains
   state.toChains = supports.toChains
   state.fromChainId = state.fromChains.find(
@@ -143,6 +143,7 @@ const refreshBridgeSupports = async () => {
 refreshBridgeSupports()
 
 const getAmounts = async () => {
+  console.log("我运行了")
   if (!state.amount) {
     return
   }
@@ -154,6 +155,7 @@ const getAmounts = async () => {
       currentToChain.value,
       state.amount
     )
+    console.log("state.amounts", state.amounts)
     state.amountsError = ''
   } catch (err) {
     state.amounts = undefined
@@ -163,7 +165,9 @@ const getAmounts = async () => {
 
 const ethereum = (window as any).ethereum
 const onConfirmTransfer = async () => {
+  console.log("state 11111", state);
   try {
+    console.log("22222");
     const result = await bridge.transfer(
       new Web3Provider(ethereum).getSigner(),
       currentToken.value,
@@ -171,6 +175,7 @@ const onConfirmTransfer = async () => {
       currentToChain.value,
       state.amount
     )
+    console.log("result", result);
 
     state.transferList.unshift({
       token: currentToken.value,
@@ -180,6 +185,7 @@ const onConfirmTransfer = async () => {
       result,
     })
   } catch (err) {
+    console.log("errror", err);
     ElNotification({
       title: 'Error',
       message: `Fail: ${err.message}`,

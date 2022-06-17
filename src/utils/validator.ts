@@ -1,3 +1,5 @@
+import { CHAIN_ID_TYPE } from "./core"
+
 export enum ChainValidatorTypes {
   Mainnet = 1,
   Testnet = 2,
@@ -102,5 +104,19 @@ export class ChainValidator {
       return ChainValidatorTypes.Testnet
     }
     return undefined
+  }
+  
+  static boba(chainId: CHAIN_ID_TYPE) {
+    if (chainId === 513) return ChainValidatorTypes.Testnet
+    if (chainId === 13)  return ChainValidatorTypes.Mainnet
+  }
+
+  static zkspace(chainId: CHAIN_ID_TYPE) {
+    if (chainId === 512) return ChainValidatorTypes.Testnet
+    if (chainId === 12) return ChainValidatorTypes.Mainnet
+  }
+
+  static zksync2(chainId: CHAIN_ID_TYPE) {
+    if (chainId === 514) return ChainValidatorTypes.Testnet;
   }
 }

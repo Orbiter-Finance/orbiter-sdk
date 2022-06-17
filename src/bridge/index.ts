@@ -9,9 +9,12 @@ import {
   TransactionImmutablex,
   TransactionLoopring,
   TransactionZksync,
+  TransactionZkSpace,
+  TransactionZKSync2
 } from '../transaction'
 import { TransactionTransferOptions } from '../transaction/transaction'
 import { ensureMetamaskNetwork, equalsIgnoreCase } from '../utils'
+import { CHAIN_ID_TYPE } from '../utils/core'
 import { ChainValidator } from '../utils/validator'
 import { makerList as makerList_mainnet } from './maker_list.mainnet'
 import { makerList as makerList_testnet } from './maker_list.testnet'
@@ -227,7 +230,6 @@ export class Bridge {
     toChain: BridgeChain
   ) {
     const makerList = await this.getMakerList()
-
     // Use map to maintain type deduction
     const targets = makerList
       .map((item) => {
@@ -405,6 +407,25 @@ export class Bridge {
         symbol: token.name,
       })
     }
+    
+    // resolve zkspace 
+    if (ChainValidator.zkspace((fromChain.id) as CHAIN_ID_TYPE)) {
+      const transactionZkspaceInstance = new TransactionZkSpace(fromChain.id, signer);
+      return await transactionZkspaceInstance.transfer({
+        ...transferOptions,
+        fromAddress: accountAddress,
+      })
+    }
+    
+    // resolve zksync
+    if (ChainValidator.zksync2(fromChain.id as CHAIN_ID_TYPE)) {
+      const transactionZKSync2Instance = new TransactionZKSync2(fromChain.id, signer);
+      return await transactionZKSync2Instance.transfer({
+        ...transferOptions,
+        fromAddress: accountAddress
+      })
+    }
+
 
     // Evm transaction
     const tEvm = new TransactionEvm(fromChain.id, signer)
