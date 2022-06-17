@@ -143,7 +143,6 @@ const refreshBridgeSupports = async () => {
 refreshBridgeSupports()
 
 const getAmounts = async () => {
-  console.log("我运行了")
   if (!state.amount) {
     return
   }
@@ -155,7 +154,6 @@ const getAmounts = async () => {
       currentToChain.value,
       state.amount
     )
-    console.log("state.amounts", state.amounts)
     state.amountsError = ''
   } catch (err) {
     state.amounts = undefined
@@ -165,9 +163,7 @@ const getAmounts = async () => {
 
 const ethereum = (window as any).ethereum
 const onConfirmTransfer = async () => {
-  console.log("state 11111", state);
   try {
-    console.log("22222");
     const result = await bridge.transfer(
       new Web3Provider(ethereum).getSigner(),
       currentToken.value,
@@ -175,7 +171,6 @@ const onConfirmTransfer = async () => {
       currentToChain.value,
       state.amount
     )
-    console.log("result", result);
 
     state.transferList.unshift({
       token: currentToken.value,
@@ -185,7 +180,6 @@ const onConfirmTransfer = async () => {
       result,
     })
   } catch (err) {
-    console.log("errror", err);
     ElNotification({
       title: 'Error',
       message: `Fail: ${err.message}`,
