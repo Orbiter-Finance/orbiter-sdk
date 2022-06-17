@@ -11,16 +11,9 @@ export default class TransactionZksync2 extends Transaction {
     if (!await zksync2Provider.isTokenLiquid(tokenAddress)) {
     throw new Error("the token can not be used for fee")
     }
-    console.log("transfer options", options);
     const provider = new zksync2.Web3Provider((window as (typeof window & { ethereum: any })).ethereum);
     const signer = provider.getSigner();
     const walletAddress = options.fromAddress;
-    // console.log("amout", options.amount.toString(), options.amount);
-    console.log("config", {
-      to: walletAddress,
-      token: tokenAddress,
-      amount: options.amount.toString()
-    });
     const transferResult = await signer.transfer({
       to: options.toAddress,
       token: tokenAddress,
