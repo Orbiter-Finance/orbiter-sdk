@@ -12,3 +12,4 @@ compiled
 docs
 yarn.lock
 package-lock.json
+test-config.ts

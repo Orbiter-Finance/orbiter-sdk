@@ -34,6 +34,14 @@ export const CHAIN_INDEX = {
   510: 'metis',
   11: 'dydx',
   511: 'dydx',
+  12: 'zkspace',
+  512: 'zkspace',
+  13: 'boba',
+  513: 'boba',
+  14: 'zksync2',// mainnet
+  514: 'zksync2',// test net 
+  15: "bnbchain",
+  515: "bnbchain"
 }
 
 export const SIZE_OP = {

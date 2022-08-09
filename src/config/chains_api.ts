@@ -49,4 +49,18 @@ export default {
     Mainnet: 'https://api.dydx.exchange',
     Testnet:  'https://api.stage.dydx.exchange',
   },
+  zkspace: {
+    key: '',
+    Mainnet: 'https://api.zks.app/v3/1',
+    Testnet: 'https://api.zks.app/v3/4',
+  },
+  zkSync2: {
+    key: '',
+    Testnet: 'https://zksync2-testnet.zksync.dev', // only testnet currently
+  },
+  bsc: {
+    key: '',
+    Mainnet: 'https://bsc-dataseed1.binance.org/',
+    TestNet: 'https://data-seed-prebsc-1-s1.binance.org:8545',
+  }
 }

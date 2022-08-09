@@ -1,5 +1,5 @@
 import { TransactionResponse } from '@ethersproject/abstract-provider'
-import { BigNumberish, ethers } from 'ethers'
+import { BigNumber, BigNumberish, ethers } from 'ethers'
 import config from '../config'
 import { isEthTokenAddress } from '../utils'
 import { CrossAddress } from '../utils/cross_address'
@@ -22,6 +22,20 @@ export class TransactionEvm extends Transaction {
       console.error('getTransferGasLimit error: ', err)
     }
     return gasLimit
+  }
+
+  private async getTransGasPrice(
+    estimator: () => Promise<ethers.BigNumber>,
+    defaultGasPrice: BigNumberish = 1
+  ) {
+    let gasPrice = defaultGasPrice
+    try {
+      gasPrice = await estimator()
+    } catch (err) {
+      console.error('getTransGasPrice error: ', err)
+    }
+    return gasPrice
+
   }
 
   /**
@@ -56,14 +70,17 @@ export class TransactionEvm extends Transaction {
 
     if (isEthTokenAddress(options.tokenAddress)) {
       // When tokenAddress is eth
+      const gasPrice = await this.getTransGasPrice(() => {
+        return this.signer.getGasPrice()
+      })
       const params = {
         to: options.toAddress,
         value: amountHex,
+        gasPrice: ethers.utils.hexlify(gasPrice)
       }
       const gasLimit = await this.getTransferGasLimit(() => {
         return this.signer.estimateGas(params)
       }, options.defaultGasLimit)
-
       return await this.signer.sendTransaction({
         ...params,
         gasLimit: gasLimit,

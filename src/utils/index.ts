@@ -52,6 +52,10 @@ export function equalsIgnoreCase(value1: string, value2: string): boolean {
  * @returns
  */
 export function isEthTokenAddress(tokenAddress: string) {
+  if(tokenAddress === "0x0000000000000000000000000000000000001010"){
+    // polygon matic token
+    return true
+  }
   return /^0x0+$/i.test(tokenAddress)
 }
 

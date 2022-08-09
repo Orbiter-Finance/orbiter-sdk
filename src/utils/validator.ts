@@ -34,6 +34,13 @@ export class ChainValidator {
     return undefined
   }
 
+  static zksync2(chainId: number) {
+    if (chainId == 514) {
+      return ChainValidatorTypes.Testnet
+    }
+    return undefined
+  }
+
   static starknet(chainId: number) {
     if (chainId == 4) {
       return ChainValidatorTypes.Mainnet
@@ -99,6 +106,16 @@ export class ChainValidator {
       return ChainValidatorTypes.Mainnet
     }
     if (chainId == 511) {
+      return ChainValidatorTypes.Testnet
+    }
+    return undefined
+  }
+
+  static zkspace(chainId: number) {
+    if (chainId == 12) {
+      return ChainValidatorTypes.Mainnet
+    }
+    if (chainId == 512) {
       return ChainValidatorTypes.Testnet
     }
     return undefined
