@@ -28,6 +28,7 @@ const orbiterChainIdToNetworkId: { [key: number]: string } = {
   512: '133', // ZKSpace testnet 
   15: '56', // BSC mainnet
   515: '97', // BSC testnet 
+  514: '280', // ZkSync2(G)
 }
 
 export default {

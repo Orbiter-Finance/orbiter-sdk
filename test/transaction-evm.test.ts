@@ -56,4 +56,19 @@ describe('test transaction_evm polygon',() => {
     expect(transferResult['from'] === testconfig.WALLET_ADDRESS).toBe(true)
   })
 
+  it('test transfer Metis', async() => {
+    const provider = new ethers.providers.JsonRpcProvider(testconfig.METIS_RPC)
+    const signer = new ethers.Wallet(testconfig.PRIVAT_KEY, provider);
+    const bobaId = 6
+    let bobaTransaction: TransactionEvm = new TransactionEvm(bobaId, signer)
+    let options: TransactionTransferOptions = {
+      amount: utils.parseEther("0.000002"),
+      tokenAddress: "0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000",
+      toAddress: testconfig.WALLET_ADDRESS,
+      // defaultGasLimit:10005000
+    }
+    let transferResult = await bobaTransaction.transfer(options)
+    expect(transferResult['from'] === testconfig.WALLET_ADDRESS).toBe(true)
+  })
+
 })
