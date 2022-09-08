@@ -15,6 +15,8 @@ export type TransactionTransferOptions = {
   receiverPublicKey?: string // For dydx, docs: https://docs.dydx.exchange/#create-transfer
   receiverPositionId?: string // For dydx
   clientIdAddress?: string // For dydx, default is toAddress
+  nonce?: number // For customize
+  maxFee?: BigNumberish
   
   crossAddressExt?: CrossAddressExt // Cross address transfer data
 }

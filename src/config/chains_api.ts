@@ -16,8 +16,8 @@ export default {
   },
   starknet: {
     key: '',
-    Mainnet: 'https://voyager.online/api',
-    Testnet:  'https://goerli.voyager.online/api',
+    Mainnet: 'https://alpha-mainnet.starknet.io',
+    Testnet:  'https://alpha4.starknet.io',
   },
   polygon: {
     key: process.env.VUE_APP_PO_KEY,
