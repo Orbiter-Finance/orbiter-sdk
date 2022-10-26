@@ -11,6 +11,10 @@ const MAX_BITS = {
   loopring: 256,
   metis: 256,
   dydx: 28,
+  bnbchain: 256,
+  nova: 256,
+  arbitrum_nova: 256,
+  polygon_zkevm: 256
 }
 
 export const CHAIN_INDEX = {
@@ -39,9 +43,13 @@ export const CHAIN_INDEX = {
   13: 'boba',
   513: 'boba',
   14: 'zksync2',// mainnet
-  514: 'zksync2',// test net 
+  514: 'zksync2',// test net
   15: "bnbchain",
-  515: "bnbchain"
+  515: "bnbchain",
+  16: "arbitrum_nova",
+  516: "arbitrum_nova",
+  17: "polygon_zkevm",
+  517: "polygon_zkevm",
 }
 
 export const SIZE_OP = {

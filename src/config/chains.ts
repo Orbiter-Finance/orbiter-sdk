@@ -98,19 +98,19 @@ export default [
     infoURL: 'https://arbiscan.io/',
   },
   {
-    name: 'Arbitrum(R)',
-    chainId: 421611,
-    shortName: 'arb-rinkeby',
-    networkId: 421611,
+    name: 'Arbitrum Görli',
+    chainId: 421613,
+    shortName: "arb-goerli",
+    networkId: 421613,
     nativeCurrency: {
-      name: 'Arbitrum Rinkeby Ether',
-      symbol: 'ARETH',
-      decimals: 18,
+      "name": "Arbitrum Görli Ether",
+      "symbol": "AGOR",
+      "decimals": 18
     },
-    rpc: ['https://rinkeby.arbitrum.io/rpc', 'wss://rinkeby.arbitrum.io/ws'],
+    rpc: ["https://goerli-rollup.arbitrum.io/rpc/"  ],
     faucets: [],
     explorers: [],
-    infoURL: 'https://testnet.arbiscan.io/',
+    infoURL: 'https://arbitrum.io/',
   },
   {
     name: 'Polygon',
@@ -208,4 +208,70 @@ export default [
     explorers: [],
     infoURL: 'https://stardust-explorer.metis.io',
   },
+  {
+    name: 'Binance Smart Chain Mainnet',
+    chainId: 56,
+    networkId: 56,
+    shortName: 'bnb',
+    nativeCurrency: {
+      "name": "Binance Chain Native Token",
+      "symbol": "BNB",
+      "decimals": 18
+    },
+    rpc: [
+      "https://bsc-dataseed1.binance.org",
+      "https://bsc-dataseed2.binance.org",
+      "https://bsc-dataseed3.binance.org",
+      "https://bsc-dataseed4.binance.org",
+      "https://bsc-dataseed1.defibit.io",
+      "https://bsc-dataseed2.defibit.io",
+      "https://bsc-dataseed3.defibit.io",
+      "https://bsc-dataseed4.defibit.io",
+      "https://bsc-dataseed1.ninicoin.io",
+      "https://bsc-dataseed2.ninicoin.io",
+      "https://bsc-dataseed3.ninicoin.io",
+      "https://bsc-dataseed4.ninicoin.io",
+      "wss://bsc-ws-node.nariox.org"
+    ],
+    faucets: [],
+    explorers: [],
+    infoURL: 'https://www.binance.org',
+  },
+  {
+    name: "Binance Smart Chain Testnet",
+    chainId: 97,
+    networkId: 97,
+    shortName: 'bnbt',
+    nativeCurrency: {
+      "name": "Binance Chain Native Token",
+      "symbol": "tBNB",
+      "decimals": 18
+    },
+    rpc: [
+      "https://data-seed-prebsc-1-s1.binance.org:8545",
+      "https://data-seed-prebsc-2-s1.binance.org:8545",
+      "https://data-seed-prebsc-1-s2.binance.org:8545",
+      "https://data-seed-prebsc-2-s2.binance.org:8545",
+      "https://data-seed-prebsc-1-s3.binance.org:8545",
+      "https://data-seed-prebsc-2-s3.binance.org:8545"
+    ],
+    faucets: [],
+    explorers: [],
+    infoURL: 'https://www.binance.org',
+  },
+  {
+    name: "Arbitrum Nova",
+    chainId: 42170,
+    networkId: 42170,
+    shortName: 'Ether',
+    nativeCurrency: {
+      "name": "Ether",
+      "symbol": "ETH",
+      "decimals": 18
+    },
+    rpc:["https://nova.arbitrum.io/rpc"],
+    faucets: [],
+    explorers: [],
+    infoURL: "https://arbitrum.io",
+  }
 ]

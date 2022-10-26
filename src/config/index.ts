@@ -25,10 +25,13 @@ const orbiterChainIdToNetworkId: { [key: number]: string } = {
   99: '5', // loopring(G)
   511: '3', // dydx(R)
   12: '13', // ZKSpace mainnet
-  512: '133', // ZKSpace testnet 
+  512: '133', // ZKSpace testnet
   15: '56', // BSC mainnet
-  515: '97', // BSC testnet 
+  515: '97', // BSC testnet
   514: '280', // ZkSync2(G)
+  16: '42170', // nova
+  516: '421613', // nova(G)
+  517: '1402', // po zkevm(G)
 }
 
 export default {
