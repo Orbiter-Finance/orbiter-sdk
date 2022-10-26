@@ -1,6 +1,6 @@
 {
   "name": "orbiter-sdk",
-  "version": "0.0.8",
+  "version": "0.1.0",
   "description": "",
   "keywords": [],
   "main": "dist/orbiter-sdk.umd.js",
