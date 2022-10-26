@@ -29,9 +29,9 @@ export class TransactionZksync2 extends Transaction {
     }
 
     const tokenAddress = options.tokenAddress;
-    if (!await zksync2Provider.isTokenLiquid(tokenAddress)) {
-      throw new Error("the token can not be used for fee")
-    }
+    // if (!await zksync2Provider.isTokenLiquid(tokenAddress)) {
+    //   throw new Error("the token can not be used for fee")
+    // }
     return <TransactionResponse>await this.zksync2wallet.transfer({
       to: options.toAddress,
       token: tokenAddress,
