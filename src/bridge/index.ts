@@ -124,16 +124,6 @@ export class Bridge {
     }
   }
 
-  /**
-   * @returns
-   */
-  public getNetwork() {
-    return this.network
-  }
-
-  /**
-   * @returns
-   */
   public async getMakerList() {
     if (this.makerList) {
       return this.makerList
@@ -147,10 +137,6 @@ export class Bridge {
     }
   }
 
-  /**
-   * @param fromChain
-   * @param toChain
-   */
   public async supports(fromChain?: BridgeChain, toChain?: BridgeChain) {
     const tokens: BridgeToken[] = []
     const fromChains: BridgeChain[] = []
@@ -279,12 +265,12 @@ export class Bridge {
     const { tradingFee, precision, minPrice, maxPrice } = targetMakerInfo
 
     // Check minPrice, maxPrice
-    if (amountHm < minPrice) {
+    if (amountHm < String(minPrice)) {
       throw new Error(
         `Orbiter get amounts failed: amount less than minPrice(${minPrice}), token: ${token.name}, fromChain: ${fromChain.name}, toChain: ${toChain.name}`
       )
     }
-    if (amountHm > maxPrice) {
+    if (amountHm > String(maxPrice)) {
       throw new Error(
         `Orbiter get amounts failed: amount greater than maxPrice(${maxPrice}), token: ${token.name}, fromChain: ${fromChain.name}, toChain: ${toChain.name}`
       )
@@ -298,7 +284,7 @@ export class Bridge {
       .toString()
 
     const payText = 9000 + Number(toChain.id) + ''
-    const result = core.getTAmountFromRAmount(fromChain.id, userAmount, payText)
+    const result = core.getTAmountFromRAmount(fromChain.id, Number(userAmount), payText)
     if (!result.state) {
       throw new Error(
         'Obirter get total amount failed! Please check if the amount matches the rules!'
@@ -330,8 +316,7 @@ export class Bridge {
 
     // Get web3Provider
     let web3Provider = <Web3Provider>signer.provider
-    web3Provider.provider
-    if (!web3Provider || !(web3Provider instanceof Web3Provider)) {
+    if (!web3Provider) {
       throw new Error('Orbiter bridge transfer failed: Invalid signer.provider')
     }
 

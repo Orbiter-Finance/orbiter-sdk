@@ -1,12 +1,12 @@
 import axios from 'axios'
-import { BigNumber } from 'bignumber.js'
+import {BigNumber} from 'bignumber.js'
 import * as zksync from "zksync";
-import { private_key_to_pubkey_hash, sign_musig } from "zksync-crypto"
-import { ethers, Signer, BigNumber as EtherBigNumber, utils, BigNumberish} from 'ethers'
+import {private_key_to_pubkey_hash, sign_musig} from "zksync-crypto"
+import {BigNumber as EtherBigNumber, ethers, Signer, utils} from 'ethers'
 
 import config from '../../config/chains_api'
-import { equalsIgnoreCase } from '../index';
-import { ChainValidator, ChainValidatorTypes } from '../../utils/validator'
+import {equalsIgnoreCase} from '../index';
+import {ChainValidator, ChainValidatorTypes} from '../validator'
 
 
 let exchangeRates: { [key: string]: string } | undefined
@@ -56,8 +56,7 @@ export async function getPrivateKey(signer: Signer){
       'Access ZKSwap account.\n\nOnly sign this message for a trusted client!'
     const signature = await signer.signMessage(msg)
     const seed = ethers.utils.arrayify(signature)
-    const privateKey = await zksync.crypto.privateKeyFromSeed(seed)
-    return privateKey
+    return await zksync.crypto.privateKeyFromSeed(seed)
   } catch (error) {
     throw new Error(`getL1SigAndPriVateKey error ${error.message}`)
   }
@@ -100,28 +99,27 @@ account id: ${hexlifiedAccountId}
 Only sign this message for a trusted client!`
   const registerSignature = await signer.signMessage(resgiterMsg)
   const url:string = GetZKSpaceUrl(localChainId) + '/tx'
-  let transferResult = await axios.post(
-    url,
-    {
-      signature: null,
-      fastProcessing: null,
-      extraParams: null,
-      tx: {
-        account: walletAccount,
-        accountId: accountInfo.id,
-        ethSignature: registerSignature,
-        newPkHash: `sync:` + pubKeyHash,
-        nonce: 0,
-        type: 'ChangePubKey',
+  return await axios.post(
+      url,
+      {
+        signature: null,
+        fastProcessing: null,
+        extraParams: null,
+        tx: {
+          account: walletAccount,
+          accountId: accountInfo.id,
+          ethSignature: registerSignature,
+          newPkHash: `sync:` + pubKeyHash,
+          nonce: 0,
+          type: 'ChangePubKey',
+        },
       },
-    },
-    {
-      headers: {
-        'zk-account': walletAccount,
-      },
-    }
+      {
+        headers: {
+          'zk-account': walletAccount,
+        },
+      }
   )
-  return transferResult
   
 }
 
@@ -368,8 +366,7 @@ export async function getL2SigTwoAndPK(
       `Fee: ${l2MsgParams.fee} ${l2MsgParams.feeSymbol}\n` +
       // `Fee: 0.0 ${l2MsgParams.feeSymbol}\n` +
       `Account Id: ${l2MsgParams.accountId}`
-    const l2SignatureTwo = await signer.signMessage(l2Msg)
-    return l2SignatureTwo
+    return await signer.signMessage(l2Msg)
   } catch (error) {
     throw new Error(`getL2SigTwoAndPK error ${error.message}`)
   }
@@ -381,8 +378,7 @@ export async function getL1SigAndPriVateKey(signer: ethers.Wallet) {
       'Access ZKSwap account.\n\nOnly sign this message for a trusted client!'
     const signature = await signer.signMessage(msg)
     const seed = ethers.utils.arrayify(signature)
-    const privateKey = await zksync.crypto.privateKeyFromSeed(seed)
-    return privateKey
+    return await zksync.crypto.privateKeyFromSeed(seed)
   } catch (error) {
     throw new Error(`getL1SigAndPriVateKey error ${error.message}`)
   }
@@ -404,14 +400,13 @@ export async function getAccountInfo(
       accountInfo.pub_key_hash ==
       'sync:0000000000000000000000000000000000000000'
     ) {
-      const new_pub_key_hash = await registerAccount(
-        accountInfo,
-        privateKey,
-        chainId,
-        signer,
-        walletAccount
+      accountInfo.pub_key_hash = await registerAccount(
+          accountInfo,
+          privateKey,
+          chainId,
+          signer,
+          walletAccount
       )
-      accountInfo.pub_key_hash = new_pub_key_hash
       accountInfo.nonce = accountInfo.nonce + 1
     }
     return accountInfo
@@ -495,7 +490,6 @@ export function toHex(num: number, length: number) {
     }
   }
   strArr.unshift('0x')
-  var hex = strArr.join('')
-  return hex
+  return strArr.join('')
 }
 
